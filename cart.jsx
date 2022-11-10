@@ -94,8 +94,14 @@ const Products = (props) => {
   const addToCart = (e) => {
     let name = e.target.name;
     let item = items.filter((item) => item.name == name);
-    console.log(`add to Cart ${JSON.stringify(item)}`);
-    setCart([...cart, ...item]);
+    if (item[0].instock == 0) {
+      alert("No inventory, restock");
+    } else {
+      item[0].instock = item[0].instock - 1;
+      console.log(`add to Cart ${JSON.stringify(item)}`);
+      console.log(item[0].instock);
+      setCart([...cart, ...item]);
+    }
     //doFetch(query);
   };
   const deleteCartItem = (index) => {
